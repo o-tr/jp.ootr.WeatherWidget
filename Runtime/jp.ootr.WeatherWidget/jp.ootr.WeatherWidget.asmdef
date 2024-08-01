@@ -1,0 +1,17 @@
+{
+    "name": "jp.ootr.WeatherWidget",
+    "references": [
+        "UdonSharp.Runtime",
+        "VRC.Udon",
+        "jp.ootr.common"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
