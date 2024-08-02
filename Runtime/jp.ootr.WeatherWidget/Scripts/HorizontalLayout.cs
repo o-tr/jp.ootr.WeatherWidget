@@ -15,7 +15,7 @@ namespace jp.ootr.WeatherWidget
         [SerializeField] private TextMeshProUGUI tempText;
         [SerializeField] private TextMeshProUGUI popText;
         [SerializeField] private TextMeshProUGUI overviewText;
-        [SerializeField] private int forecastCount;
+        [SerializeField] public int forecastCount;
 
         protected override void OnWeatherLoadSuccess(WeatherData data)
         {

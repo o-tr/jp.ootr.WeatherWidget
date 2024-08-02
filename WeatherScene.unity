@@ -386,7 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launchedFromSDKPipeline: 0
   completedSDKPipeline: 0
-  blueprintId: wrld_a9c7d59d-2a8f-4489-aa7a-a51eb6fbbb38
+  blueprintId: 
   contentType: 1
   assetBundleUnityVersion: 
   fallbackStatus: 0
@@ -705,10 +705,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3519630885417581180, guid: ade2b3e357669fe40a82979e908a520c, type: 3}
-      propertyPath: weatherApiUrl.url
-      value: https://weather.ootr.jp/api?geoPosId=130010
-      objectReference: {fileID: 0}
     - target: {fileID: 3519630885417581180, guid: ade2b3e357669fe40a82979e908a520c, type: 3}
       propertyPath: serializationData.Prefab
       value: 
