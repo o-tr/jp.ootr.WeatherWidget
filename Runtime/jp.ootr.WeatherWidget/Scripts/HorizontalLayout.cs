@@ -35,7 +35,7 @@ namespace jp.ootr.WeatherWidget
                 var obj = Instantiate(baseObject, rootTransform);
                 obj.SetActive(true);
             }
-            rootTransform.ToFillChildren(FillDirection.Horizontal,8,8);
+            rootTransform.ToFillChildren(Direction.Horizontal,8,8);
             data.GetOverview(out var overview);
             overviewText.text = overview;
         }
