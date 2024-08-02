@@ -350,7 +350,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "\u6C17\u8C61\u5E81 2024-08-02T17:00:00+09:00:00 \u767A\u8868"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: edf2e447af4874e4b8b0314823bfefaf, type: 2}
   m_sharedMaterial: {fileID: -6069958157732398970, guid: edf2e447af4874e4b8b0314823bfefaf, type: 2}
@@ -1719,7 +1719,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\u6982\u8981"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: edf2e447af4874e4b8b0314823bfefaf, type: 2}
   m_sharedMaterial: {fileID: -6069958157732398970, guid: edf2e447af4874e4b8b0314823bfefaf, type: 2}
@@ -1987,7 +1987,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "Hogehoge \u306E\u5929\u6C17"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: edf2e447af4874e4b8b0314823bfefaf, type: 2}
   m_sharedMaterial: {fileID: -6069958157732398970, guid: edf2e447af4874e4b8b0314823bfefaf, type: 2}
