@@ -1,5 +1,6 @@
 ﻿using jp.ootr.common;
 using UnityEditor;
+using UnityEngine;
 
 namespace jp.ootr.WeatherWidget.Editor
 {
@@ -22,9 +23,12 @@ namespace jp.ootr.WeatherWidget.Editor
 
             EditorGUILayout.Space();
 
-            EditorGUILayout.LabelField("Forecast Count");
-            script.forecastCount = (int)EditorGUILayout.Slider(script.forecastCount, 3, 7);
+            script.forecastCount = (int)EditorGUILayout.Slider("Forecast Count",script.forecastCount, 3, 7);
 
+            EditorGUILayout.Space();
+            
+            script.splashImage.sprite = (Sprite)EditorGUILayout.ObjectField("SplashImage", script.splashImage.sprite, typeof(Sprite), false);
+            
             if (!EditorGUI.EndChangeCheck()) return;
             EditorUtility.SetDirty(script);
         }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace jp.ootr.WeatherWidget
 {
-    public class HorizontalLayout : Copy
+    public class HorizontalLayout : Settings
     {
         [SerializeField] private Transform rootTransform;
         [SerializeField] private GameObject baseObject;
@@ -20,6 +20,7 @@ namespace jp.ootr.WeatherWidget
         protected override void OnWeatherLoadSuccess(WeatherData data)
         {
             base.OnWeatherLoadSuccess(data);
+            rootTransform.ClearChildren();
             var count = Mathf.Min(forecastCount, data.GetWeatherSize(out var size) ? size : 0);
             for (var i = 0; i < count; i++)
             {
@@ -34,6 +35,7 @@ namespace jp.ootr.WeatherWidget
                 popText.text = $"{pop}";
                 var obj = Instantiate(baseObject, rootTransform);
                 obj.SetActive(true);
+                obj.name = $"{date}";
             }
             rootTransform.ToFillChildrenHorizontal(8,8);
             data.GetOverview(out var overview);

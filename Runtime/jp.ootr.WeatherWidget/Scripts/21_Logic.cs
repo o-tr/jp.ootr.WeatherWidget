@@ -1,4 +1,3 @@
-using jp.ootr.common;
 using UnityEngine;
 using VRC.SDK3.Data;
 using VRC.SDK3.StringLoading;
@@ -8,12 +7,15 @@ using VRC.Udon.Common.Interfaces;
 
 namespace jp.ootr.WeatherWidget
 {
-    public class Logic : BaseClass
+    public class Logic : UIErrorModal
     {
         [SerializeField] private VRCUrl weatherApiUrl;
+        
+        private readonly int _animatorLoading = Animator.StringToHash("Loading");
         private void Start()
         {
             VRCStringDownloader.LoadUrl(weatherApiUrl, (IUdonEventReceiver)this);
+            animator.SetBool(_animatorLoading, true);
         }
         
         public override void OnStringLoadSuccess(IVRCStringDownload result)
@@ -29,11 +31,20 @@ namespace jp.ootr.WeatherWidget
                 return;
             }
             OnWeatherLoadSuccess((WeatherData)json.DataDictionary);
+            animator.SetBool(_animatorLoading, false);
         }
         
         public override void OnStringLoadError(IVRCStringDownload result)
         {
             OnWeatherLoadError(LoadError.FailedToLoad);
+            ShowErrorModal("読み込みに失敗しました", "Allow Untrusted URLs が有効になっているか確認してみてください。");
+        }
+        
+        public override void CloseErrorModal()
+        {
+            base.CloseErrorModal();
+            VRCStringDownloader.LoadUrl(weatherApiUrl, (IUdonEventReceiver)this);
+            animator.SetBool(_animatorLoading, true);
         }
         
         protected virtual void OnWeatherLoadSuccess(WeatherData data)
