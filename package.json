@@ -1,7 +1,7 @@
 ﻿{
   "name": "jp.ootr.weather-widget",
   "displayName": "Weather Widget",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "unity": "2022.3",
   "description": "weather widget for vrchat worlds",
