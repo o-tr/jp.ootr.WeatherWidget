@@ -1,6 +1,7 @@
 ﻿using jp.ootr.common;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace jp.ootr.WeatherWidget.Editor
 {
@@ -27,10 +28,24 @@ namespace jp.ootr.WeatherWidget.Editor
 
             EditorGUILayout.Space();
             
-            script.splashImage.sprite = (Sprite)EditorGUILayout.ObjectField("SplashImage", script.splashImage.sprite, typeof(Sprite), false);
+            if (EditorGUI.EndChangeCheck())
+            {
+                EditorUtility.SetDirty(script);
+            }
+            if (script.splashImage != null)
+            {
+                var texture = (Sprite)EditorGUILayout.ObjectField("Splash Image",
+                    script.splashImage.sprite, typeof(Sprite), false);
+                if (texture != script.splashImage.sprite)
+                {
+                    var splashImageProp = serializedObject.FindProperty("splashImage");
+                    var splashImage = (Image)splashImageProp.objectReferenceValue;
+                    var soImage = new SerializedObject(splashImage);
+                    soImage.FindProperty("m_Texture").objectReferenceValue = texture;
+                    soImage.ApplyModifiedProperties();
+                }
+            }
             
-            if (!EditorGUI.EndChangeCheck()) return;
-            EditorUtility.SetDirty(script);
         }
     }
 }
