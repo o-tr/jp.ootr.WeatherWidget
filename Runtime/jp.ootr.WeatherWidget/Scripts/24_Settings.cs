@@ -2,10 +2,11 @@
 
 namespace jp.ootr.WeatherWidget
 {
-    public class Settings : Copy {
+    public class Settings : Copy
+    {
         private readonly int _animatorShow = Animator.StringToHash("Settings");
-        private bool _isShown = false;
-        
+        private bool _isShown;
+
         public void ToggleSettings()
         {
             _isShown = !_isShown;

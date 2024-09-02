@@ -4,6 +4,6 @@
     {
         FailedToLoad,
         InvalidJson,
-        InvalidResponse,
+        InvalidResponse
     }
 }

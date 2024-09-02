@@ -9,29 +9,28 @@ namespace jp.ootr.WeatherWidget.Editor
     public class HorizontalLayoutEditor : UnityEditor.Editor
     {
         private bool _debug;
+
         public override void OnInspectorGUI()
         {
             var script = (HorizontalLayout)target;
-            
+
             _debug = EditorGUILayout.ToggleLeft("Debug", _debug);
             if (_debug)
             {
                 base.OnInspectorGUI();
                 return;
             }
+
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.LabelField("WeatherWidget", EditorStyle.UiTitle);
 
             EditorGUILayout.Space();
 
-            script.forecastCount = (int)EditorGUILayout.Slider("Forecast Count",script.forecastCount, 3, 7);
+            script.forecastCount = (int)EditorGUILayout.Slider("Forecast Count", script.forecastCount, 3, 7);
 
             EditorGUILayout.Space();
-            
-            if (EditorGUI.EndChangeCheck())
-            {
-                EditorUtility.SetDirty(script);
-            }
+
+            if (EditorGUI.EndChangeCheck()) EditorUtility.SetDirty(script);
             if (script.splashImage != null)
             {
                 var texture = (Sprite)EditorGUILayout.ObjectField("Splash Image",
@@ -45,7 +44,6 @@ namespace jp.ootr.WeatherWidget.Editor
                     soImage.ApplyModifiedProperties();
                 }
             }
-            
         }
     }
 }

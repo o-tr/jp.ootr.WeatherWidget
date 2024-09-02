@@ -2,7 +2,7 @@
 
 namespace jp.ootr.WeatherWidget
 {
-    public class Icon: Logic
+    public class Icon : Logic
     {
         [SerializeField] private Sprite c100;
         [SerializeField] private Sprite c101;
@@ -142,6 +142,5 @@ namespace jp.ootr.WeatherWidget
                     return c100;
             }
         }
-        
     }
 }

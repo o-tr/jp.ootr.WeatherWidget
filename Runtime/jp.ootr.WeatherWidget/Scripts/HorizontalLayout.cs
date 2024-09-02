@@ -24,10 +24,8 @@ namespace jp.ootr.WeatherWidget
             var count = Mathf.Min(forecastCount, data.GetWeatherSize(out var size) ? size : 0);
             for (var i = 0; i < count; i++)
             {
-                if (!data.GetWeather(i, out var date, out var tempMin, out var tempMax, out var pop, out var icon, out var weather))
-                {
-                    continue;
-                }
+                if (!data.GetWeather(i, out var date, out var tempMin, out var tempMax, out var pop, out var icon,
+                        out var weather)) continue;
                 dateText.text = date;
                 forecastImage.sprite = GetIconByName(icon);
                 forecastText.text = weather;
@@ -37,7 +35,8 @@ namespace jp.ootr.WeatherWidget
                 obj.SetActive(true);
                 obj.name = $"{date}";
             }
-            rootTransform.ToFillChildrenHorizontal(8,8);
+
+            rootTransform.ToFillChildrenHorizontal(8, 8);
             data.GetOverview(out var overview);
             overviewText.text = overview;
         }
