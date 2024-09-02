@@ -760,7 +760,7 @@ PrefabInstance:
     - target: {fileID: 3519630885417581180, guid: ade2b3e357669fe40a82979e908a520c, type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 3519630885417581180, guid: ade2b3e357669fe40a82979e908a520c, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5791824752024410390, guid: ade2b3e357669fe40a82979e908a520c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -922,7 +922,7 @@ PrefabInstance:
     - target: {fileID: 281962283949007693, guid: 6fe1fd6e9402e4b40837641417b94699, type: 3}
       propertyPath: serializationData.Prefab
       value: 
-      objectReference: {fileID: 281962283949007693, guid: 6fe1fd6e9402e4b40837641417b94699, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 8714833478319036974, guid: 6fe1fd6e9402e4b40837641417b94699, type: 3}
       propertyPath: m_Name
       value: WeatherWidgetVertical
