@@ -40,6 +40,7 @@ namespace jp.ootr.WeatherWidget.Editor
                     var splashImageProp = serializedObject.FindProperty("splashImage");
                     var splashImage = (Image)splashImageProp.objectReferenceValue;
                     var soImage = new SerializedObject(splashImage);
+                    soImage.Update();
                     soImage.FindProperty("m_Texture").objectReferenceValue = texture;
                     soImage.ApplyModifiedProperties();
                 }
