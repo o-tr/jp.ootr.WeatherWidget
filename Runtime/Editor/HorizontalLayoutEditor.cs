@@ -3,7 +3,7 @@
 namespace jp.ootr.WeatherWidget.Editor
 {
     [CustomEditor(typeof(HorizontalLayout))]
-    public class HorizontalLayoutEditor : BaseEditor
+    public class HorizontalLayoutEditor : WidgetEditor
     {
     }
 }
