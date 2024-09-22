@@ -33,6 +33,8 @@ public class WeatherWidgetUtils : EditorWindow
     public void CreateGUI()
     {
         VisualElement root = rootVisualElement;
+        
+        root.Add(GetTargetPicker());
 
         {
             var fold = new Foldout { text = "Icon Preset Picker" };
@@ -47,16 +49,27 @@ public class WeatherWidgetUtils : EditorWindow
         }
     }
 
-    private VisualElement GetIconPresetPicker()
+    private VisualElement GetTargetPicker()
     {
         var root = new VisualElement();
-        
         _targetField = new ObjectField()
         {
             label = "Target",
             objectType = typeof(WeatherWidgetBase),
             value = _target
         };
+        _targetField.RegisterValueChangedCallback(evt =>
+        {
+            _target = evt.newValue as WeatherWidgetBase;
+        });
+        root.Add(_targetField);
+        return root;
+    }
+    
+    private VisualElement GetIconPresetPicker()
+    {
+        var root = new VisualElement();
+        
         var preset = new ObjectField
         {
             label = "Icon Preset",
@@ -73,8 +86,7 @@ public class WeatherWidgetUtils : EditorWindow
         
         _targetField.RegisterValueChangedCallback(evt =>
         {
-            _target = evt.newValue as WeatherWidgetBase;
-            applyButton.SetEnabled(_iconPreset != null && _target != null);
+            applyButton.SetEnabled(_iconPreset != null && evt.newValue != null);
         });
         
         preset.RegisterValueChangedCallback(evt =>
@@ -87,16 +99,13 @@ public class WeatherWidgetUtils : EditorWindow
         {
             if (_target == null || _iconPreset == null) return;
             ApplyIconPreset();
-            _target = default;
             _iconPreset = default;
-            _targetField.value = default;
             preset.value = default;
             applyButton.SetEnabled(false);
             infoBox.Clear();
             infoBox.Add(new HelpBox("Applied!", HelpBoxMessageType.Info));
         };
         
-        root.Add(_targetField);
         root.Add(preset);
         root.Add(applyButton);
         root.Add(infoBox);
@@ -107,13 +116,6 @@ public class WeatherWidgetUtils : EditorWindow
     private VisualElement GetColorSetter()
     {
         var root = new VisualElement();
-        
-        var targetField = new ObjectField
-        {
-            label = "Target",
-            objectType = typeof(WeatherWidgetBase),
-            value = _target
-        };
         
         var backgroundColor = new ColorField
         {
@@ -135,18 +137,15 @@ public class WeatherWidgetUtils : EditorWindow
             if (_target == null) return;
             ApplyColor(backgroundColor.value, textColor.value);
             _target = default;
-            targetField.value = default;
             backgroundColor.value = _defaultBgColor;
             textColor.value = _defaultTextColor;
         });
-        targetField.RegisterValueChangedCallback(evt =>
+        _targetField.RegisterValueChangedCallback(evt =>
         {
-            _target = evt.newValue as WeatherWidgetBase;
-            applyButton.SetEnabled(_target != null);
+            applyButton.SetEnabled(evt.newValue != null);
         });
         applyButton.SetEnabled(false);
         
-        root.Add(targetField);
         root.Add(backgroundColor);
         root.Add(textColor);
         root.Add(applyButton);
