@@ -7,8 +7,8 @@ using UnityEngine.UIElements;
 
 public class WeatherWidgetUtils : EditorWindow
 {
-    private Color defaultTextColor = Color.white;
-    private Color defaultBgColor = new Color(0.1640625f, 0.1640625f, 0.1953125f);
+    private readonly Color _defaultTextColor = Color.white;
+    private readonly Color _defaultBgColor = new Color(0.1640625f, 0.1640625f, 0.1953125f);
     
     private WeatherWidgetBase _target;
     private IconPreset _iconPreset;
@@ -136,8 +136,8 @@ public class WeatherWidgetUtils : EditorWindow
             ApplyColor(backgroundColor.value, textColor.value);
             _target = default;
             targetField.value = default;
-            backgroundColor.value = defaultBgColor;
-            textColor.value = defaultTextColor;
+            backgroundColor.value = _defaultBgColor;
+            textColor.value = _defaultTextColor;
         });
         targetField.RegisterValueChangedCallback(evt =>
         {
