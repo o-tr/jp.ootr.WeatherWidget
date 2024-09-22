@@ -8,11 +8,11 @@ using Image = UnityEngine.UI.Image;
 
 namespace jp.ootr.WeatherWidget.Editor
 {
-    public class WidgetEditor : BaseEditor 
+    public class WidgetEditor : BaseEditor
     {
         private SerializedProperty _forecastCount;
         private SerializedProperty _splashImageTexture;
-        
+
         public override void OnEnable()
         {
             base.OnEnable();
@@ -22,69 +22,63 @@ namespace jp.ootr.WeatherWidget.Editor
         protected override VisualElement GetLayout()
         {
             var root = new VisualElement();
-            
+
             root.Add(GetForecastCount());
-            
+
             root.Add(GetOpenUtilityButton());
-            
+
             root.Add(GetOther());
-            
+
             return root;
         }
 
         private VisualElement GetForecastCount()
         {
             var root = new VisualElement();
-            
+
             var forecastCount = new PropertyField(_forecastCount);
             forecastCount.Bind(serializedObject);
             root.Add(forecastCount);
-            
+
             return root;
         }
-        
+
         private VisualElement GetOpenUtilityButton()
         {
             var root = new VisualElement();
-            
+
             var openEditor = new Button
             {
-                text = "Open Utility",
+                text = "Open Utility"
             };
-            openEditor.clicked += () =>
-            {
-                WeatherWidgetUtils.ShowWindowWithTarget((WeatherWidgetBase)target);
-            };
+            openEditor.clicked += () => { WeatherWidgetUtils.ShowWindowWithTarget((WeatherWidgetBase)target); };
             root.Add(openEditor);
-            
+
             return root;
         }
 
         private VisualElement GetOther()
         {
             var script = (WeatherWidgetBase)target;
-            var foldout = new Foldout()
+            var foldout = new Foldout
             {
                 text = "Other",
                 value = false
             };
 
-            if (script.splashImage != null)
-            {
-                foldout.Add(GetSplashImageTexture());
-            }
+            if (script.splashImage != null) foldout.Add(GetSplashImageTexture());
 
             return foldout;
         }
-        
+
         private VisualElement GetSplashImageTexture()
         {
             var texture = new ObjectField("Splash Image")
             {
                 bindingPath = "splashSprite",
-                objectType = typeof(Sprite),
+                objectType = typeof(Sprite)
             };
-                
+
             texture.RegisterValueChangedCallback(evt =>
             {
                 var newTexture = (Sprite)evt.newValue;
@@ -95,7 +89,7 @@ namespace jp.ootr.WeatherWidget.Editor
                 soImage.FindProperty("m_Sprite").objectReferenceValue = newTexture;
                 soImage.ApplyModifiedProperties();
             });
-            
+
             return texture;
         }
 

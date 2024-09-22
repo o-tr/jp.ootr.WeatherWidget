@@ -15,7 +15,7 @@ namespace jp.ootr.WeatherWidget
         [SerializeField] private TextMeshProUGUI tempText;
         [SerializeField] private TextMeshProUGUI popText;
         [SerializeField] private TextMeshProUGUI overviewText;
-        [SerializeField][Range(3,7)] public int forecastCount;
+        [SerializeField] [Range(3, 7)] public int forecastCount;
 
         protected override void OnWeatherLoadSuccess(WeatherData data)
         {
@@ -36,7 +36,7 @@ namespace jp.ootr.WeatherWidget
                 obj.name = $"{date}";
             }
 
-            rootTransform.ToFillChildrenVertical(24, 0);
+            rootTransform.ToFillChildrenVertical(24);
             data.GetOverview(out var overview);
             overviewText.text = overview;
         }
