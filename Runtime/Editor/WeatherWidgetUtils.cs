@@ -7,6 +7,9 @@ using UnityEngine.UIElements;
 
 public class WeatherWidgetUtils : EditorWindow
 {
+    private Color defaultTextColor = Color.white;
+    private Color defaultBgColor = new Color(0.1640625f, 0.1640625f, 0.1953125f);
+    
     private WeatherWidgetBase _target;
     private IconPreset _iconPreset;
     
@@ -34,6 +37,12 @@ public class WeatherWidgetUtils : EditorWindow
         {
             var fold = new Foldout { text = "Icon Preset Picker" };
             fold.Add(GetIconPresetPicker());
+            root.Add(fold);
+        }
+        
+        {
+            var fold = new Foldout { text = "Color Setter" };
+            fold.Add(GetColorSetter());
             root.Add(fold);
         }
     }
@@ -95,6 +104,56 @@ public class WeatherWidgetUtils : EditorWindow
         return root;
     }
     
+    private VisualElement GetColorSetter()
+    {
+        var root = new VisualElement();
+        
+        var targetField = new ObjectField
+        {
+            label = "Target",
+            objectType = typeof(WeatherWidgetBase),
+            value = _target
+        };
+        
+        var backgroundColor = new ColorField
+        {
+            label = "Background Color",
+            value = new Color(0.1640625f, 0.1640625f, 0.1953125f)
+        };
+        var textColor = new ColorField
+        {
+            label = "Text Color",
+            value = Color.white
+        };
+        
+        var applyButton = new Button
+        {
+            text = "Apply",
+        };
+        applyButton.RegisterCallback<ClickEvent>(evt =>
+        {
+            if (_target == null) return;
+            ApplyColor(backgroundColor.value, textColor.value);
+            _target = default;
+            targetField.value = default;
+            backgroundColor.value = defaultBgColor;
+            textColor.value = defaultTextColor;
+        });
+        targetField.RegisterValueChangedCallback(evt =>
+        {
+            _target = evt.newValue as WeatherWidgetBase;
+            applyButton.SetEnabled(_target != null);
+        });
+        applyButton.SetEnabled(false);
+        
+        root.Add(targetField);
+        root.Add(backgroundColor);
+        root.Add(textColor);
+        root.Add(applyButton);
+        
+        return root;
+    }
+    
     private void ApplyIconPreset()
     {
         if (_target == null || _iconPreset == null) return;
@@ -143,6 +202,44 @@ public class WeatherWidgetUtils : EditorWindow
         so.FindProperty("c711").objectReferenceValue = _iconPreset.i711;
         so.FindProperty("c801").objectReferenceValue = _iconPreset.i801;
         so.FindProperty("c811").objectReferenceValue = _iconPreset.i811;
+        so.ApplyModifiedProperties();
+    }
+    
+    private void ApplyColor(Color bgColor, Color textColor)
+    {
+        if (_target == null) return;
+        var so = new SerializedObject(_target);
+        so.Update();
+        foreach (var bgImage in _target.bgImages)
+        {
+            var soImage = new SerializedObject(bgImage);
+            soImage.Update();
+            soImage.FindProperty("m_Color").colorValue = bgColor;
+            soImage.ApplyModifiedProperties();
+        }
+        foreach (var text in _target.textImages)
+        {
+            var soText = new SerializedObject(text);
+            soText.Update();
+            soText.FindProperty("m_Color").colorValue = textColor;
+            soText.ApplyModifiedProperties();
+        }
+        Debug.Log(_target.textMeshes);
+        foreach (var tmp in _target.textMeshes)
+        {
+            var soIcon = new SerializedObject(tmp);
+            soIcon.Update();
+            soIcon.FindProperty("m_fontColor").colorValue = textColor;
+            soIcon.FindProperty("m_faceColor").colorValue = bgColor;
+            soIcon.ApplyModifiedProperties();
+        }
+        foreach (var input in _target.textInputFields)
+        {
+            var soInput = new SerializedObject(input);
+            soInput.Update();
+            soInput.FindProperty("m_Colors.m_NormalColor").colorValue = textColor;
+            soInput.ApplyModifiedProperties();
+        }
         so.ApplyModifiedProperties();
     }
 }
