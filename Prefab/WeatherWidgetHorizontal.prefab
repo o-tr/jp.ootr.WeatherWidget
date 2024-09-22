@@ -2395,6 +2395,7 @@ MonoBehaviour:
   logLevel: 0
   animator: {fileID: 1553655515845000584}
   splashImage: {fileID: 2602652363329783995}
+  splashSprite: {fileID: 21300000, guid: 15636d556a5e830479915b15ce95f9e3, type: 3}
   errorModal: {fileID: 7680047987588713811}
   errorModalTransform: {fileID: 1761152095669525066}
   errorTitle: {fileID: 1490194946369350701}

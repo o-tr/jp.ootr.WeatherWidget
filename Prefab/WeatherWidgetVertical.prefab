@@ -4510,7 +4510,7 @@ MonoBehaviour:
   logLevel: 0
   animator: {fileID: 2460213443457671158}
   splashImage: {fileID: 4128717098204091989}
-  splashSprite: {fileID: 0}
+  splashSprite: {fileID: 21300000, guid: 912a398b77e59694992df2db3943c83f, type: 3}
   errorModal: {fileID: 2434299161889528120}
   errorModalTransform: {fileID: 2409574719394610438}
   errorTitle: {fileID: 7564251088106437122}
