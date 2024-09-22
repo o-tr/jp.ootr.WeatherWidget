@@ -1,5 +1,4 @@
-﻿using jp.ootr.common;
-using jp.ootr.common.Editor;
+﻿using jp.ootr.common.Editor;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
@@ -21,9 +20,36 @@ namespace jp.ootr.WeatherWidget.Editor
         {
             var root = new VisualElement();
             
-            var forecastCountField = new PropertyField(_forecastCount);
-            forecastCountField.Bind(serializedObject);
-            root.Add(forecastCountField);
+            root.Add(GetForecastCount());
+            
+            return root;
+        }
+
+        private VisualElement GetForecastCount()
+        {
+            var root = new VisualElement();
+            
+            var forecastCount = new PropertyField(_forecastCount);
+            forecastCount.Bind(serializedObject);
+            root.Add(forecastCount);
+            
+            return root;
+        }
+
+        private VisualElement GetIconPresetOpener()
+        {
+            var root = new VisualElement();
+            
+            var iconPresetOpener = new Button
+            {
+                text = "Open Icon Preset"
+            };
+            iconPresetOpener.clicked += () =>
+            {
+                // Open Icon Preset Window
+                
+            };
+            root.Add(iconPresetOpener);
             
             return root;
         }

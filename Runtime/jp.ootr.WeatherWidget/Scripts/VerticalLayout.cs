@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace jp.ootr.WeatherWidget
 {
-    public class VerticalLayout : Settings
+    public class VerticalLayout : WeatherWidgetBase
     {
         [SerializeField] private Transform rootTransform;
         [SerializeField] private GameObject baseObject;
