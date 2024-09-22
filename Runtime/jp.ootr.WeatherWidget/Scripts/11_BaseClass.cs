@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace jp.ootr.WeatherWidget
@@ -7,5 +8,10 @@ namespace jp.ootr.WeatherWidget
     {
         [SerializeField] protected Animator animator;
         [SerializeField] public Image splashImage;
+        [SerializeField] public Sprite splashSprite;
+        [SerializeField] public Image[] bgImages;
+        [SerializeField] public TextMeshProUGUI[] textMeshes;
+        [SerializeField] public TMP_InputField[] textInputFields;
+        [SerializeField] public Image[] textImages;
     }
 }

@@ -1,7 +1,7 @@
 ﻿{
   "name": "jp.ootr.weather-widget",
   "displayName": "Weather Widget",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "license": "MIT",
   "unity": "2022.3",
   "description": "weather widget for vrchat worlds",
@@ -17,6 +17,6 @@
   "vpmDependencies": {
     "com.vrchat.base": "^3.6.1",
     "com.vrchat.worlds": "^3.6.1",
-    "jp.ootr.common": "~0.0.9"
+    "jp.ootr.common": "~0.1.0"
   }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace jp.ootr.WeatherWidget
 {
-    public class VerticalLayout : Settings
+    public class VerticalLayout : WeatherWidgetBase
     {
         [SerializeField] private Transform rootTransform;
         [SerializeField] private GameObject baseObject;
@@ -15,7 +15,7 @@ namespace jp.ootr.WeatherWidget
         [SerializeField] private TextMeshProUGUI tempText;
         [SerializeField] private TextMeshProUGUI popText;
         [SerializeField] private TextMeshProUGUI overviewText;
-        [SerializeField] public int forecastCount;
+        [SerializeField][Range(3,7)] public int forecastCount;
 
         protected override void OnWeatherLoadSuccess(WeatherData data)
         {
