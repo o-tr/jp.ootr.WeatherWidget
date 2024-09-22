@@ -10,11 +10,21 @@ public class WeatherWidgetUtils : EditorWindow
     private WeatherWidgetBase _target;
     private IconPreset _iconPreset;
     
+    private ObjectField _targetField;
+    
     [MenuItem("Tools/ootr/WeatherWidgetUtils")]
-    public static void ShowExample()
+    public static void ShowWindow()
     {
         WeatherWidgetUtils wnd = GetWindow<WeatherWidgetUtils>();
         wnd.titleContent = new GUIContent("WeatherWidgetUtils");
+    }
+    
+    public static void ShowWindowWithTarget(WeatherWidgetBase target)
+    {
+        WeatherWidgetUtils wnd = GetWindow<WeatherWidgetUtils>();
+        wnd.titleContent = new GUIContent("WeatherWidgetUtils");
+        wnd._target = target;
+        wnd._targetField.value = target;
     }
 
     public void CreateGUI()
@@ -32,15 +42,17 @@ public class WeatherWidgetUtils : EditorWindow
     {
         var root = new VisualElement();
         
-        var target = new ObjectField()
+        _targetField = new ObjectField()
         {
             label = "Target",
             objectType = typeof(WeatherWidgetBase),
+            value = _target
         };
         var preset = new ObjectField
         {
             label = "Icon Preset",
             objectType = typeof(IconPreset),
+            value = _iconPreset
         };
         var applyButton = new Button
         {
@@ -50,7 +62,7 @@ public class WeatherWidgetUtils : EditorWindow
 
         var infoBox = new VisualElement { };
         
-        target.RegisterValueChangedCallback(evt =>
+        _targetField.RegisterValueChangedCallback(evt =>
         {
             _target = evt.newValue as WeatherWidgetBase;
             applyButton.SetEnabled(_iconPreset != null && _target != null);
@@ -68,14 +80,14 @@ public class WeatherWidgetUtils : EditorWindow
             ApplyIconPreset();
             _target = default;
             _iconPreset = default;
-            target.value = default;
+            _targetField.value = default;
             preset.value = default;
             applyButton.SetEnabled(false);
             infoBox.Clear();
             infoBox.Add(new HelpBox("Applied!", HelpBoxMessageType.Info));
         };
         
-        root.Add(target);
+        root.Add(_targetField);
         root.Add(preset);
         root.Add(applyButton);
         root.Add(infoBox);
