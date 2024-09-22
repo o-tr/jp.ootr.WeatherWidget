@@ -7,33 +7,18 @@ using UnityEngine.UIElements;
 
 public class WeatherWidgetUtils : EditorWindow
 {
-    private readonly Color _defaultTextColor = Color.white;
     private readonly Color _defaultBgColor = new Color(0.1640625f, 0.1640625f, 0.1953125f);
-    
-    private WeatherWidgetBase _target;
+    private readonly Color _defaultTextColor = Color.white;
     private IconPreset _iconPreset;
-    
+
+    private WeatherWidgetBase _target;
+
     private ObjectField _targetField;
-    
-    [MenuItem("Tools/ootr/WeatherWidgetUtils")]
-    public static void ShowWindow()
-    {
-        WeatherWidgetUtils wnd = GetWindow<WeatherWidgetUtils>();
-        wnd.titleContent = new GUIContent("WeatherWidgetUtils");
-    }
-    
-    public static void ShowWindowWithTarget(WeatherWidgetBase target)
-    {
-        WeatherWidgetUtils wnd = GetWindow<WeatherWidgetUtils>();
-        wnd.titleContent = new GUIContent("WeatherWidgetUtils");
-        wnd._target = target;
-        wnd._targetField.value = target;
-    }
 
     public void CreateGUI()
     {
-        VisualElement root = rootVisualElement;
-        
+        var root = rootVisualElement;
+
         root.Add(GetTargetPicker());
 
         {
@@ -41,7 +26,7 @@ public class WeatherWidgetUtils : EditorWindow
             fold.Add(GetIconPresetPicker());
             root.Add(fold);
         }
-        
+
         {
             var fold = new Foldout { text = "Color Setter" };
             fold.Add(GetColorSetter());
@@ -49,27 +34,39 @@ public class WeatherWidgetUtils : EditorWindow
         }
     }
 
+    [MenuItem("Tools/ootr/WeatherWidgetUtils")]
+    public static void ShowWindow()
+    {
+        var wnd = GetWindow<WeatherWidgetUtils>();
+        wnd.titleContent = new GUIContent("WeatherWidgetUtils");
+    }
+
+    public static void ShowWindowWithTarget(WeatherWidgetBase target)
+    {
+        var wnd = GetWindow<WeatherWidgetUtils>();
+        wnd.titleContent = new GUIContent("WeatherWidgetUtils");
+        wnd._target = target;
+        wnd._targetField.value = target;
+    }
+
     private VisualElement GetTargetPicker()
     {
         var root = new VisualElement();
-        _targetField = new ObjectField()
+        _targetField = new ObjectField
         {
             label = "Target",
             objectType = typeof(WeatherWidgetBase),
             value = _target
         };
-        _targetField.RegisterValueChangedCallback(evt =>
-        {
-            _target = evt.newValue as WeatherWidgetBase;
-        });
+        _targetField.RegisterValueChangedCallback(evt => { _target = evt.newValue as WeatherWidgetBase; });
         root.Add(_targetField);
         return root;
     }
-    
+
     private VisualElement GetIconPresetPicker()
     {
         var root = new VisualElement();
-        
+
         var preset = new ObjectField
         {
             label = "Icon Preset",
@@ -78,23 +75,23 @@ public class WeatherWidgetUtils : EditorWindow
         };
         var applyButton = new Button
         {
-            text = "Apply",
+            text = "Apply"
         };
         applyButton.SetEnabled(false);
 
-        var infoBox = new VisualElement { };
-        
+        var infoBox = new VisualElement();
+
         _targetField.RegisterValueChangedCallback(evt =>
         {
             applyButton.SetEnabled(_iconPreset != null && evt.newValue != null);
         });
-        
+
         preset.RegisterValueChangedCallback(evt =>
         {
             _iconPreset = evt.newValue as IconPreset;
             applyButton.SetEnabled(_iconPreset != null && _target != null);
         });
-        
+
         applyButton.clicked += () =>
         {
             if (_target == null || _iconPreset == null) return;
@@ -105,18 +102,18 @@ public class WeatherWidgetUtils : EditorWindow
             infoBox.Clear();
             infoBox.Add(new HelpBox("Applied!", HelpBoxMessageType.Info));
         };
-        
+
         root.Add(preset);
         root.Add(applyButton);
         root.Add(infoBox);
-        
+
         return root;
     }
-    
+
     private VisualElement GetColorSetter()
     {
         var root = new VisualElement();
-        
+
         var backgroundColor = new ColorField
         {
             label = "Background Color",
@@ -127,10 +124,10 @@ public class WeatherWidgetUtils : EditorWindow
             label = "Text Color",
             value = Color.white
         };
-        
+
         var applyButton = new Button
         {
-            text = "Apply",
+            text = "Apply"
         };
         applyButton.RegisterCallback<ClickEvent>(evt =>
         {
@@ -140,19 +137,16 @@ public class WeatherWidgetUtils : EditorWindow
             backgroundColor.value = _defaultBgColor;
             textColor.value = _defaultTextColor;
         });
-        _targetField.RegisterValueChangedCallback(evt =>
-        {
-            applyButton.SetEnabled(evt.newValue != null);
-        });
+        _targetField.RegisterValueChangedCallback(evt => { applyButton.SetEnabled(evt.newValue != null); });
         applyButton.SetEnabled(false);
-        
+
         root.Add(backgroundColor);
         root.Add(textColor);
         root.Add(applyButton);
-        
+
         return root;
     }
-    
+
     private void ApplyIconPreset()
     {
         if (_target == null || _iconPreset == null) return;
@@ -203,7 +197,7 @@ public class WeatherWidgetUtils : EditorWindow
         so.FindProperty("c811").objectReferenceValue = _iconPreset.i811;
         so.ApplyModifiedProperties();
     }
-    
+
     private void ApplyColor(Color bgColor, Color textColor)
     {
         if (_target == null) return;
@@ -216,6 +210,7 @@ public class WeatherWidgetUtils : EditorWindow
             soImage.FindProperty("m_Color").colorValue = bgColor;
             soImage.ApplyModifiedProperties();
         }
+
         foreach (var text in _target.textImages)
         {
             var soText = new SerializedObject(text);
@@ -223,6 +218,7 @@ public class WeatherWidgetUtils : EditorWindow
             soText.FindProperty("m_Color").colorValue = textColor;
             soText.ApplyModifiedProperties();
         }
+
         Debug.Log(_target.textMeshes);
         foreach (var tmp in _target.textMeshes)
         {
@@ -232,6 +228,7 @@ public class WeatherWidgetUtils : EditorWindow
             soIcon.FindProperty("m_faceColor").colorValue = bgColor;
             soIcon.ApplyModifiedProperties();
         }
+
         foreach (var input in _target.textInputFields)
         {
             var soInput = new SerializedObject(input);
@@ -239,6 +236,7 @@ public class WeatherWidgetUtils : EditorWindow
             soInput.FindProperty("m_Colors.m_NormalColor").colorValue = textColor;
             soInput.ApplyModifiedProperties();
         }
+
         so.ApplyModifiedProperties();
     }
 }
