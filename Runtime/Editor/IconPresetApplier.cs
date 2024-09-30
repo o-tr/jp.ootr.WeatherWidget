@@ -5,10 +5,9 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class WeatherWidgetUtils : EditorWindow
+public class IconPresetApplier : EditorWindow
 {
-    private readonly Color _defaultBgColor = new Color(0.1640625f, 0.1640625f, 0.1953125f);
-    private readonly Color _defaultTextColor = Color.white;
+    [SerializeField] private StyleSheet baseStyleSheet;
     private IconPreset _iconPreset;
 
     private WeatherWidgetBase _target;
@@ -17,34 +16,27 @@ public class WeatherWidgetUtils : EditorWindow
 
     public void CreateGUI()
     {
-        var root = rootVisualElement;
+        var root = new VisualElement();
+        root.styleSheets.Add(baseStyleSheet);
+        root.AddToClassList("root");
 
         root.Add(GetTargetPicker());
-
-        {
-            var fold = new Foldout { text = "Icon Preset Picker" };
-            fold.Add(GetIconPresetPicker());
-            root.Add(fold);
-        }
-
-        {
-            var fold = new Foldout { text = "Color Setter" };
-            fold.Add(GetColorSetter());
-            root.Add(fold);
-        }
+        root.Add(GetIconPresetPicker());
+        
+        rootVisualElement.Add(root);
     }
 
-    [MenuItem("Tools/ootr/WeatherWidgetUtils")]
+    [MenuItem("Tools/ootr/WeatherWidget/IconPresetApplier")]
     public static void ShowWindow()
     {
-        var wnd = GetWindow<WeatherWidgetUtils>();
-        wnd.titleContent = new GUIContent("WeatherWidgetUtils");
+        var wnd = GetWindow<IconPresetApplier>();
+        wnd.titleContent = new GUIContent("IconPresetApplier");
     }
 
     public static void ShowWindowWithTarget(WeatherWidgetBase target)
     {
-        var wnd = GetWindow<WeatherWidgetUtils>();
-        wnd.titleContent = new GUIContent("WeatherWidgetUtils");
+        var wnd = GetWindow<IconPresetApplier>();
+        wnd.titleContent = new GUIContent("IconPresetApplier");
         wnd._target = target;
         wnd._targetField.value = target;
     }
@@ -110,43 +102,6 @@ public class WeatherWidgetUtils : EditorWindow
         return root;
     }
 
-    private VisualElement GetColorSetter()
-    {
-        var root = new VisualElement();
-
-        var backgroundColor = new ColorField
-        {
-            label = "Background Color",
-            value = new Color(0.1640625f, 0.1640625f, 0.1953125f)
-        };
-        var textColor = new ColorField
-        {
-            label = "Text Color",
-            value = Color.white
-        };
-
-        var applyButton = new Button
-        {
-            text = "Apply"
-        };
-        applyButton.RegisterCallback<ClickEvent>(evt =>
-        {
-            if (_target == null) return;
-            ApplyColor(backgroundColor.value, textColor.value);
-            _target = default;
-            backgroundColor.value = _defaultBgColor;
-            textColor.value = _defaultTextColor;
-        });
-        _targetField.RegisterValueChangedCallback(evt => { applyButton.SetEnabled(evt.newValue != null); });
-        applyButton.SetEnabled(false);
-
-        root.Add(backgroundColor);
-        root.Add(textColor);
-        root.Add(applyButton);
-
-        return root;
-    }
-
     private void ApplyIconPreset()
     {
         if (_target == null || _iconPreset == null) return;
@@ -195,48 +150,6 @@ public class WeatherWidgetUtils : EditorWindow
         so.FindProperty("c711").objectReferenceValue = _iconPreset.i711;
         so.FindProperty("c801").objectReferenceValue = _iconPreset.i801;
         so.FindProperty("c811").objectReferenceValue = _iconPreset.i811;
-        so.ApplyModifiedProperties();
-    }
-
-    private void ApplyColor(Color bgColor, Color textColor)
-    {
-        if (_target == null) return;
-        var so = new SerializedObject(_target);
-        so.Update();
-        foreach (var bgImage in _target.bgImages)
-        {
-            var soImage = new SerializedObject(bgImage);
-            soImage.Update();
-            soImage.FindProperty("m_Color").colorValue = bgColor;
-            soImage.ApplyModifiedProperties();
-        }
-
-        foreach (var text in _target.textImages)
-        {
-            var soText = new SerializedObject(text);
-            soText.Update();
-            soText.FindProperty("m_Color").colorValue = textColor;
-            soText.ApplyModifiedProperties();
-        }
-
-        Debug.Log(_target.textMeshes);
-        foreach (var tmp in _target.textMeshes)
-        {
-            var soIcon = new SerializedObject(tmp);
-            soIcon.Update();
-            soIcon.FindProperty("m_fontColor").colorValue = textColor;
-            soIcon.FindProperty("m_faceColor").colorValue = bgColor;
-            soIcon.ApplyModifiedProperties();
-        }
-
-        foreach (var input in _target.textInputFields)
-        {
-            var soInput = new SerializedObject(input);
-            soInput.Update();
-            soInput.FindProperty("m_Colors.m_NormalColor").colorValue = textColor;
-            soInput.ApplyModifiedProperties();
-        }
-
         so.ApplyModifiedProperties();
     }
 }

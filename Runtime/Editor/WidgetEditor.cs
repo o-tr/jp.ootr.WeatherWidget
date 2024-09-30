@@ -25,9 +25,9 @@ namespace jp.ootr.WeatherWidget.Editor
 
             root.Add(GetForecastCount());
 
-            root.Add(GetOpenUtilityButton());
-
             root.Add(GetOther());
+
+            ShowIconPresetApplierButton();
 
             return root;
         }
@@ -43,18 +43,14 @@ namespace jp.ootr.WeatherWidget.Editor
             return root;
         }
 
-        private VisualElement GetOpenUtilityButton()
+        private void ShowIconPresetApplierButton()
         {
-            var root = new VisualElement();
-
             var openEditor = new Button
             {
-                text = "Open Utility"
+                text = "IconPresetApplier"
             };
-            openEditor.clicked += () => { WeatherWidgetUtils.ShowWindowWithTarget((WeatherWidgetBase)target); };
-            root.Add(openEditor);
-
-            return root;
+            openEditor.clicked += () => { IconPresetApplier.ShowWindowWithTarget((WeatherWidgetBase)target); };
+            UtilitiesBlock.Add(openEditor);
         }
 
         private VisualElement GetOther()
