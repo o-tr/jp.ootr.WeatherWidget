@@ -22,7 +22,7 @@ public class IconPresetApplier : EditorWindow
 
         root.Add(GetTargetPicker());
         root.Add(GetIconPresetPicker());
-        
+
         rootVisualElement.Add(root);
     }
 
@@ -118,6 +118,7 @@ public class IconPresetApplier : EditorWindow
             icons.GetArrayElementAtIndex(i).objectReferenceValue = _iconPreset.icons[i];
             iconNames.GetArrayElementAtIndex(i).stringValue = _iconPreset.iconNames[i];
         }
+
         so.ApplyModifiedProperties();
     }
 }

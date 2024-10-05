@@ -10,10 +10,7 @@ namespace jp.ootr.WeatherWidget
 
         protected Sprite GetIconByName(string iconName)
         {
-            if (iconNames.Has(iconName, out var index))
-            {
-                return icons[index];
-            }
+            if (iconNames.Has(iconName, out var index)) return icons[index];
             return icons.Length > 0 ? icons[0] : null;
         }
     }
