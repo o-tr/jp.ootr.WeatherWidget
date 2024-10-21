@@ -220,6 +220,18 @@ PrefabInstance:
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 3519630885417581180, guid: ade2b3e357669fe40a82979e908a520c, type: 3}
+    - target: {fileID: 3519630885417581180, guid: ade2b3e357669fe40a82979e908a520c, type: 3}
+      propertyPath: colorSchemes.Array.data[0].a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519630885417581180, guid: ade2b3e357669fe40a82979e908a520c, type: 3}
+      propertyPath: colorSchemes.Array.data[1].a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3519630885417581180, guid: ade2b3e357669fe40a82979e908a520c, type: 3}
+      propertyPath: colorSchemes.Array.data[2].a
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3873093146316169561, guid: ade2b3e357669fe40a82979e908a520c, type: 3}
       propertyPath: m_faceColor.rgba
       value: 16777215
