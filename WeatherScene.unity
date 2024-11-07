@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &32160796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5748485061027313150, guid: 7d92ba733b982794fa4dfc202853fd9b, type: 3}
+  m_PrefabInstance: {fileID: 164616268}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &106079901
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,8 +843,16 @@ MonoBehaviour:
     ID: 11
     SerializedTypeNames:
     - VRC.Udon.UdonBehaviour
-  - gameObject: {fileID: 0}
+  - gameObject: {fileID: 32160796}
     ID: 12
+    SerializedTypeNames:
+    - VRC.Udon.UdonBehaviour
+  - gameObject: {fileID: 1817561745}
+    ID: 13
+    SerializedTypeNames:
+    - VRC.Udon.UdonBehaviour
+  - gameObject: {fileID: 1183167402}
+    ID: 14
     SerializedTypeNames:
     - VRC.Udon.UdonBehaviour
   portraitCameraPositionOffset: {x: 0, y: 0, z: 0}
@@ -973,6 +986,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fe1fd6e9402e4b40837641417b94699, type: 3}
+--- !u!1 &1183167402 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7808005581679795146, guid: 29e2673817ab1ea48afc3825e46c3a3f, type: 3}
+  m_PrefabInstance: {fileID: 1255716796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1255716796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1481,6 +1499,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ade2b3e357669fe40a82979e908a520c, type: 3}
+--- !u!1 &1817561745 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8714833478319036974, guid: 6fe1fd6e9402e4b40837641417b94699, type: 3}
+  m_PrefabInstance: {fileID: 574398066}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
