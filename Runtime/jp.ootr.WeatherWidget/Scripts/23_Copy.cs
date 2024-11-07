@@ -7,7 +7,7 @@ namespace jp.ootr.WeatherWidget
     {
         [SerializeField] private TextMeshProUGUI regionText;
         [SerializeField] private TextMeshProUGUI copyText;
-
+        
         protected override void OnWeatherLoadSuccess(WeatherData data)
         {
             base.OnWeatherLoadSuccess(data);
@@ -17,8 +17,9 @@ namespace jp.ootr.WeatherWidget
                 !data.GetRegion(out var region)
             )
                 return;
-            regionText.text = $"{region} の天気";
-            copyText.text = $"{office} {dateTime} 発表";
+            var locale = data.GetLocale();
+            regionText.text = string.Format(GetText("region", locale), region);
+            copyText.text = string.Format(GetText("copy", locale), office, dateTime);
         }
     }
 }

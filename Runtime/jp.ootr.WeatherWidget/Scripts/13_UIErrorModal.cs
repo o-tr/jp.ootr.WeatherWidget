@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace jp.ootr.WeatherWidget
 {
-    public class UIErrorModal : BaseClass
+    public class UIErrorModal : L18n
     {
         [SerializeField] private GameObject errorModal;
         [SerializeField] private RectTransform errorModalTransform;
