@@ -71,5 +71,10 @@ namespace jp.ootr.WeatherWidget
             overview = overviewToken.String;
             return true;
         }
+
+        public static string GetLocale(this WeatherData data)
+        {
+            return data.TryGetValue("locale", out var localeToken) ? localeToken.String : "en";
+        }
     }
 }
