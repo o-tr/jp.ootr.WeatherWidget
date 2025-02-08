@@ -18,7 +18,8 @@ namespace jp.ootr.WeatherWidget
             )
                 return;
             var locale = data.GetLocale();
-            regionText.text = string.Format(GetText("region", locale), region);
+            var hideLocation = data.GetHideLocation();
+            regionText.text = hideLocation ? GetText("weather", locale) : string.Format(GetText("region", locale), region);
             copyText.text = string.Format(GetText("copy", locale), office, dateTime);
         }
     }
