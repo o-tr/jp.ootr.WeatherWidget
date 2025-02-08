@@ -32,7 +32,12 @@ namespace jp.ootr.WeatherWidget
                 return;
             }
 
-            OnWeatherLoadSuccess((WeatherData)json.DataDictionary);
+            var data = (WeatherData)json.DataDictionary;
+            var autoUpdateInterval = data.GetAutoUpdateInterval();
+            if (autoUpdateInterval > 0){
+                SendCustomEventDelayedSeconds(nameof(Refresh), autoUpdateInterval);
+            }
+            OnWeatherLoadSuccess(data);
             animator.SetBool(_animatorLoading, false);
         }
 
@@ -45,6 +50,11 @@ namespace jp.ootr.WeatherWidget
         public override void CloseErrorModal()
         {
             base.CloseErrorModal();
+            Refresh();
+        }
+
+        public virtual void Refresh()
+        {
             VRCStringDownloader.LoadUrl(weatherApiUrl, (IUdonEventReceiver)this);
             animator.SetBool(_animatorLoading, true);
         }
