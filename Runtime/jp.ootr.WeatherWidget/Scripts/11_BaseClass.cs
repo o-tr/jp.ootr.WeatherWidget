@@ -8,5 +8,6 @@ namespace jp.ootr.WeatherWidget
         [SerializeField] protected Animator animator;
         [SerializeField] public Image splashImage;
         [SerializeField] public Sprite splashSprite;
+        [SerializeField] public bool disableAutoLoad;
     }
 }

@@ -14,8 +14,12 @@ namespace jp.ootr.WeatherWidget
 
         private void Start()
         {
-            VRCStringDownloader.LoadUrl(weatherApiUrl, (IUdonEventReceiver)this);
-            animator.SetBool(_animatorLoading, true);
+            if (disableAutoLoad)
+            {
+            ShowErrorModal("クリックして天気予報を読み込みます", "Click to load weather forecast");
+                return;
+            }
+            Load();
         }
 
         public override void OnStringLoadSuccess(IVRCStringDownload result)
@@ -35,7 +39,7 @@ namespace jp.ootr.WeatherWidget
             var data = (WeatherData)json.DataDictionary;
             var autoUpdateInterval = data.GetAutoUpdateInterval();
             if (autoUpdateInterval > 0){
-                SendCustomEventDelayedSeconds(nameof(Refresh), autoUpdateInterval);
+                SendCustomEventDelayedSeconds(nameof(Load), autoUpdateInterval);
             }
             OnWeatherLoadSuccess(data);
             animator.SetBool(_animatorLoading, false);
@@ -50,10 +54,10 @@ namespace jp.ootr.WeatherWidget
         public override void CloseErrorModal()
         {
             base.CloseErrorModal();
-            Refresh();
+            Load();
         }
 
-        public virtual void Refresh()
+        public virtual void Load()
         {
             VRCStringDownloader.LoadUrl(weatherApiUrl, (IUdonEventReceiver)this);
             animator.SetBool(_animatorLoading, true);

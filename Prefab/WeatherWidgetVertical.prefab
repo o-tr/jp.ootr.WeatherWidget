@@ -3406,7 +3406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Retry
+  m_text: OK
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: edf2e447af4874e4b8b0314823bfefaf, type: 2}
   m_sharedMaterial: {fileID: -6069958157732398970, guid: edf2e447af4874e4b8b0314823bfefaf, type: 2}
@@ -4956,6 +4956,7 @@ MonoBehaviour:
   animator: {fileID: 2460213443457671158}
   splashImage: {fileID: 4128717098204091989}
   splashSprite: {fileID: 21300000, guid: 912a398b77e59694992df2db3943c83f, type: 3}
+  disableAutoLoad: 0
   l18nKeys:
   - ja.region
   - ja.copy

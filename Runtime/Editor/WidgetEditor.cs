@@ -25,6 +25,8 @@ namespace jp.ootr.WeatherWidget.Editor
 
             root.Add(GetForecastCount());
 
+            root.Add(GetToggleAutoLoad());
+
             root.Add(GetOther());
 
             ShowIconPresetApplierButton();
@@ -39,6 +41,19 @@ namespace jp.ootr.WeatherWidget.Editor
             var forecastCount = new PropertyField(_forecastCount);
             forecastCount.Bind(serializedObject);
             root.Add(forecastCount);
+
+            return root;
+        }
+
+        private VisualElement GetToggleAutoLoad(){
+            var root = new VisualElement();
+
+            var disableAutoLoad = new Toggle("Disable Auto Load")
+            {
+                bindingPath = nameof(WeatherWidgetBase.disableAutoLoad)
+            };
+            disableAutoLoad.Bind(serializedObject);
+            root.Add(disableAutoLoad);
 
             return root;
         }
