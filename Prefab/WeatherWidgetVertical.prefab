@@ -4930,8 +4930,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6347670946857167638}
-  logLevel: 0
-  colorSchemeNames:
+  colorSchemaNames:
   - PrimaryBackground
   - SecondaryBackground
   - TertiaryBackground
@@ -4939,7 +4938,7 @@ MonoBehaviour:
   - ErrorColor
   - PrimaryText
   - PlaceholderText
-  colorSchemes:
+  colorSchemas:
   - {r: 0.16078432, g: 0.15294118, b: 0.2, a: 1}
   - {r: 0.24313726, g: 0.23529412, b: 0.30588236, a: 1}
   - {r: 0.41568628, g: 0.3764706, b: 0.49411765, a: 1}
@@ -4947,6 +4946,13 @@ MonoBehaviour:
   - {r: 1, g: 0.5882353, b: 0.5882353, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 0.5019608}
+  logLevel: 0
+  defaultLanguage: 0
+  supportedLanguages: 
+  localizationKeys: []
+  localizationValues: []
+  localizationTargetKeys: []
+  localizationTargets: []
   animator: {fileID: 2460213443457671158}
   splashImage: {fileID: 4128717098204091989}
   splashSprite: {fileID: 21300000, guid: 912a398b77e59694992df2db3943c83f, type: 3}
@@ -4955,11 +4961,15 @@ MonoBehaviour:
   - ja.copy
   - en.region
   - en.copy
+  - ja.weather
+  - en.weather
   l18nValues:
   - "{0} \u306E\u5929\u6C17"
   - "{0} {1} \u767A\u8868"
   - Weather in {0}
   - Reported by {0} in {1}
+  - "\u5929\u6C17\u4E88\u5831"
+  - Weather forecast
   errorModal: {fileID: 2434299161889528120}
   errorModalTransform: {fileID: 2409574719394610438}
   errorTitle: {fileID: 7564251088106437122}
