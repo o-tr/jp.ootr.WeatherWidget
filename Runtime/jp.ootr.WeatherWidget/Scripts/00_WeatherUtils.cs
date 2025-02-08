@@ -76,5 +76,16 @@ namespace jp.ootr.WeatherWidget
         {
             return data.TryGetValue("locale", out var localeToken) ? localeToken.String : "en";
         }
+
+        public static bool GetHideLocation(this WeatherData data)
+        {
+            if (!data.TryGetValue("hideLocation", out var hideLocationToken)) return false;
+            return hideLocationToken.Boolean;
+        }
+
+        public static int GetAutoUpdateInterval(this WeatherData data)
+        {
+            return data.TryGetValue("autoUpdateInterval", out var intervalToken) ? (int)intervalToken.Double : 0;
+        }
     }
 }

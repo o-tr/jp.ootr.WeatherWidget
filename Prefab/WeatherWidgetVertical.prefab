@@ -3406,7 +3406,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Retry
+  m_text: OK
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: edf2e447af4874e4b8b0314823bfefaf, type: 2}
   m_sharedMaterial: {fileID: -6069958157732398970, guid: edf2e447af4874e4b8b0314823bfefaf, type: 2}
@@ -4930,8 +4930,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   _udonSharpBackingUdonBehaviour: {fileID: 6347670946857167638}
-  logLevel: 0
-  colorSchemeNames:
+  colorSchemaNames:
   - PrimaryBackground
   - SecondaryBackground
   - TertiaryBackground
@@ -4939,7 +4938,7 @@ MonoBehaviour:
   - ErrorColor
   - PrimaryText
   - PlaceholderText
-  colorSchemes:
+  colorSchemas:
   - {r: 0.16078432, g: 0.15294118, b: 0.2, a: 1}
   - {r: 0.24313726, g: 0.23529412, b: 0.30588236, a: 1}
   - {r: 0.41568628, g: 0.3764706, b: 0.49411765, a: 1}
@@ -4947,19 +4946,36 @@ MonoBehaviour:
   - {r: 1, g: 0.5882353, b: 0.5882353, a: 1}
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 0.5019608}
+  logLevel: 0
+  defaultLanguage: 0
+  supportedLanguages: 
+  localizationKeys: []
+  localizationValues: []
+  localizationTargetKeys: []
+  localizationTargets: []
   animator: {fileID: 2460213443457671158}
   splashImage: {fileID: 4128717098204091989}
   splashSprite: {fileID: 21300000, guid: 912a398b77e59694992df2db3943c83f, type: 3}
+  disableAutoLoad: 0
   l18nKeys:
   - ja.region
   - ja.copy
   - en.region
   - en.copy
+  - ja.weather
+  - en.weather
+  - ja.settings
+  - en.settings
   l18nValues:
   - "{0} \u306E\u5929\u6C17"
   - "{0} {1} \u767A\u8868"
   - Weather in {0}
   - Reported by {0} in {1}
+  - "\u5929\u6C17\u4E88\u5831"
+  - Weather forecast
+  - "\u5929\u6C17\u4E88\u5831\u306E\u5730\u70B9\u5909\u66F4\u3084\u5730\u70B9\u540D\u975E\u8868\u793A\u3001\u81EA\u52D5\u66F4\u65B0\u9593\u9694\u306E\u5909\u66F4\u3092\u4EE5\u4E0B\u306EURL\u304B\u3089\u8A2D\u5B9A\u53EF\u80FD\u3067\u3059"
+  - You can change the location of the weather forecast, hide the location name,
+    and change the automatic update interval from the following URL
   errorModal: {fileID: 2434299161889528120}
   errorModalTransform: {fileID: 2409574719394610438}
   errorTitle: {fileID: 7564251088106437122}
@@ -5057,6 +5073,7 @@ MonoBehaviour:
   - 811
   regionText: {fileID: 4246934365300043782}
   copyText: {fileID: 6496474513238194229}
+  _settingsTitle: {fileID: 3949050999798572920}
   rootTransform: {fileID: 8997287046251787800}
   baseObject: {fileID: 6411242028992400601}
   dateText: {fileID: 7731437598471914945}
